@@ -4,8 +4,8 @@ import {useState} from 'react';
 import { useEffect } from 'react';
 import { JsonToTable } from "react-json-to-table";
 
-function SevenYears(){
-  var yearRoi= 1.105;
+function SevenYears({yearRoi}){
+  // var yearRoi= 1.105;
   var [n, setn] = useState(7);
   var [roi,setroi] = useState(Math.pow(yearRoi,7).toPrecision(3));
   var [a, seta] = useState(1);
@@ -29,13 +29,16 @@ function SevenYears(){
       setra(ra);
       console.log("ra:" + ra);
 
-      setTestResult([...testResult,{year:n, roi, roi_by_year: (roi/n).toPrecision(3), multply: (n * (yearRoi-1)).toPrecision(3)}]);
+      setTestResult([...testResult,{year:n, roi, 
+        //roi_by_year: (roi/n).toPrecision(3),
+        // multply: (n * (yearRoi-1)).toPrecision(3)
+        }]);
   }
 
   return (
     <div className="seven-years">
         <h2>Seven Years</h2>
-        <p>year growth: 10.05</p>
+        <p>year growth: {yearRoi}</p>
         <p>{n} year 1 rupee Roi : {roi}</p>
         Years: <input type='number' value={n} onChange={changeYear}/> <br/>
         Amount: <input tyep='number' onChange ={e=>seta(e.target.value)} value={a}/>
@@ -162,7 +165,14 @@ function App() {
     <p>Tawakal, Taqwa , Tavazo</p>
 
 
-    <SevenYears/>
+    <div className="seven-years-group">
+      <SevenYears yearRoi= {1.105}/>
+      <SevenYears yearRoi= {1.15}/>
+
+      <SevenYears yearRoi= {1.20}/>
+    </div>
+
+
     <hr/>
 
     <h2>Count {number}</h2>
