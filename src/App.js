@@ -58,6 +58,44 @@ function CountDown({number}) {
   );
 }
 
+function Timer({name}){
+
+
+  var [temp, settemp] = useState(0);
+  var [number, setNumber] = useState(0);
+  var [c, setc] = useState(0);
+
+  var interval = null;
+  const start = () =>{
+    if(number >0){
+      setc(number);
+      interval = setInterval(() =>{
+        console.log("inside timer interval name: "+name);
+        setc(c => c-1);
+        if(c ==0){
+          clearInterval(interval);
+        }
+      },1000)
+    }
+  };
+
+  const stop =()=>{
+    if(interval){
+      clearInterval(interval);
+    }
+  };
+  return(
+    <div className="timer">
+      Timer {name}
+      <input type="number" value={number} onChange ={e => setNumber(e.target.value)}/>
+      {/* <input type="number" value={temp} onChange ={e => settemp(e.target.value)}/> */}
+      <p>Counter: {c}</p>
+      <button onClick={start}>Start</button>
+      <button onClick={stop}>stop</button>
+    </div>
+  );
+}
+
 function App() {
 
   var [number, SetNumber] = useState(0);
@@ -86,6 +124,13 @@ function App() {
 
     <hr/>
 
+    <div className="timer-group">
+      <Timer name={"zuhr"}/>
+      <Timer name={"asr"}/>
+      <Timer name={"magrib"}/>
+    </div>
+    
+    <hr/>
     <StopWatch/>
     <hr/>
     <CountDown number={10}/> <br/>
