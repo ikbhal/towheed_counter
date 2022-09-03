@@ -2,12 +2,16 @@ import logo from './logo.svg';
 import './App.css';
 import {useState} from 'react';
 import { useEffect } from 'react';
+import { JsonToTable } from "react-json-to-table";
 
 function SevenYears(){
+  var yearRoi= 1.105;
   var [n, setn] = useState(7);
-  var [roi,setroi] = useState(Math.pow(1.105,7));
+  var [roi,setroi] = useState(Math.pow(yearRoi,7).toPrecision(3));
   var [a, seta] = useState(1);
   var [ra, setra] = useState(1);
+  var [testResult, setTestResult] = useState([]);
+  
   // useEffect(()=>{
   //     var r = Math.pow(1, n);
   //     setroi(r);
@@ -15,13 +19,17 @@ function SevenYears(){
 
   const changeYear = (e) =>{
       var y = parseInt(e.target.value);
+      console.log("y:"+y);
       setn(y);
-      var r = Math.pow(1.05, y).toPrecision(3);
+      var r = Math.pow(yearRoi, y).toPrecision(3);
       console.log("r: " +r);
       setroi(r);
+      console.log("a:" +a);
       var ra = (a * r).toPrecision(3);
       setra(ra);
       console.log("ra:" + ra);
+
+      setTestResult([...testResult,{year:n, roi, multply: (n * (yearRoi-1)).toPrecision(3)}]);
   }
 
   return (
@@ -32,6 +40,9 @@ function SevenYears(){
         Years: <input type='number' value={n} onChange={changeYear}/> <br/>
         Amount: <input tyep='number' onChange ={e=>seta(e.target.value)} value={a}/>
         <p>Return for amount : {ra}</p>
+
+        <hr/>
+        <JsonToTable json={testResult} />
     </div>
   );
 }
