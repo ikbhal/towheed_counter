@@ -3,6 +3,39 @@ import './App.css';
 import {useState} from 'react';
 import { useEffect } from 'react';
 
+function SevenYears(){
+  var [n, setn] = useState(7);
+  var [roi,setroi] = useState(Math.pow(1.105,7));
+  var [a, seta] = useState(1);
+  var [ra, setra] = useState(1);
+  // useEffect(()=>{
+  //     var r = Math.pow(1, n);
+  //     setroi(r);
+  // },[n]);
+
+  const changeYear = (e) =>{
+      var y = parseInt(e.target.value);
+      setn(y);
+      var r = Math.pow(1.05, y).toPrecision(3);
+      console.log("r: " +r);
+      setroi(r);
+      var ra = (a * r).toPrecision(3);
+      setra(ra);
+      console.log("ra:" + ra);
+  }
+
+  return (
+    <div className="seven-years">
+        <h2>Seven Years</h2>
+        <p>year growth: 10.05</p>
+        <p>{n} year 1 rupee Roi : {roi}</p>
+        Years: <input type='number' value={n} onChange={changeYear}/> <br/>
+        Amount: <input tyep='number' onChange ={e=>seta(e.target.value)} value={a}/>
+        <p>Return for amount : {ra}</p>
+    </div>
+  );
+}
+
 function StopWatch(){
 
   var [h, seth] = useState(0);
@@ -116,6 +149,10 @@ function App() {
     
     <h1>Towheed</h1>
     <p>Tawakal, Taqwa , Tavazo</p>
+
+
+    <SevenYears/>
+    <hr/>
 
     <h2>Count {number}</h2>
     <button onClick={incr}>+</button>
