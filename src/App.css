@@ -46,6 +46,9 @@
 
 .seven-years-group{
   border: 1px solid green;
+  overflow: auto;
+  height: 500px;
+  width: 800px;
 }
 .seven-years-group:after {
   content: "";

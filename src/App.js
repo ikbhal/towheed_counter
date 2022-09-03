@@ -170,6 +170,9 @@ function App() {
       <SevenYears yearRoi= {1.15}/>
 
       <SevenYears yearRoi= {1.20}/>
+      <SevenYears yearRoi= {1.3}/>
+      <SevenYears yearRoi= {1.40}/>
+      <SevenYears yearRoi= {1.50}/>
     </div>
 
 
