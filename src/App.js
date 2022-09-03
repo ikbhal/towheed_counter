@@ -29,7 +29,7 @@ function SevenYears(){
       setra(ra);
       console.log("ra:" + ra);
 
-      setTestResult([...testResult,{year:n, roi, multply: (n * (yearRoi-1)).toPrecision(3)}]);
+      setTestResult([...testResult,{year:n, roi, roi_by_year: (roi/n).toPrecision(3), multply: (n * (yearRoi-1)).toPrecision(3)}]);
   }
 
   return (
